@@ -3,7 +3,7 @@ import pickle
 
 import torch
 from torch.utils.data import DataLoader
-from torchvision import transforms
+from torchvision import transforms, datasets
 import lmdb
 from tqdm import tqdm
 
@@ -38,7 +38,6 @@ if __name__ == '__main__':
     parser.add_argument('--size', type=int, default=256)
     parser.add_argument('--ckpt', type=str)
     parser.add_argument('--name', type=str)
-    parser.add_argument('path', type=str)
 
     args = parser.parse_args()
 
@@ -53,8 +52,15 @@ if __name__ == '__main__':
         ]
     )
 
-    dataset = ImageFileDataset(args.path, transform=transform)
-    loader = DataLoader(dataset, batch_size=128, shuffle=False, num_workers=4)
+    dataset = datasets.CIFAR10(
+        root="datasets/CIFAR10/", download=True, transform=transform
+    )
+    loader = DataLoader(
+        dataset,
+        batch_size=128,
+        num_workers=2,
+        shuffle=False,
+    )
 
     model = VQVAE()
     model.load_state_dict(torch.load(args.ckpt))
