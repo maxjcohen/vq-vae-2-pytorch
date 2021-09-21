@@ -153,3 +153,7 @@ if __name__ == '__main__':
             {'model': model.module.state_dict(), 'args': args},
             f'checkpoint/pixelsnail_{args.hier}_{str(i + 1).zfill(3)}.pt',
         )
+    torch.save(
+        {'model': model.module.state_dict(), 'args': args},
+        f'checkpoint/pixelsnail_{args.hier}.pt'
+    )

@@ -126,6 +126,7 @@ def main(args):
 
         if dist.is_primary():
             torch.save(model.state_dict(), f"checkpoint/vqvae_{str(i + 1).zfill(3)}.pt")
+    torch.save(model.state_dict(), "checkpoint/vqvae.pt")
 
 
 if __name__ == "__main__":
