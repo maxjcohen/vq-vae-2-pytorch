@@ -101,6 +101,7 @@ def main(args):
     loader = DataLoader(dataset, batch_size=128, num_workers=2)
 
     model = VQVAE().to(device)
+    model.load_state_dict(torch.load("vqvae_560.pt"))
 
     if args.distributed:
         model = nn.parallel.DistributedDataParallel(
