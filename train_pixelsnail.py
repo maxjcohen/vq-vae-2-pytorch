@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     dataset = LMDBDataset(args.path)
     loader = DataLoader(
-        dataset, batch_size=args.batch, shuffle=True, num_workers=4, drop_last=True
+        dataset, batch_size=args.batch, shuffle=True, num_workers=2, drop_last=True
     )
 
     ckpt = {}
