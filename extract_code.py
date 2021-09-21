@@ -17,7 +17,11 @@ def extract(lmdb_env, loader, model, device):
     with lmdb_env.begin(write=True) as txn:
         pbar = tqdm(loader)
 
-        for img, _, filename in pbar:
+        idx_image = 0
+        for img, _ in pbar:
+            idx_image += 1
+
+            filename = str(idx_image)
             img = img.to(device)
 
             _, _, _, id_t, id_b = model.encode(img)
